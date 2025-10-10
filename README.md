@@ -188,7 +188,7 @@ mvn test
 
 2. **Run JAR**
    ```bash
-   java -jar target/portfolio-backend-0.0.1-SNAPSHOT.jar
+   java -jar target/website-backend.jar
    ```
 
 ### Docker Deployment
@@ -197,7 +197,7 @@ Create a `Dockerfile`:
 
 ```dockerfile
 FROM openjdk:17-jdk-slim
-COPY target/portfolio-backend-0.0.1-SNAPSHOT.jar app.jar
+COPY target/website-backend.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app.jar"]
 ```

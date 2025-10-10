@@ -5,7 +5,7 @@
 
 # Configuration
 APP_NAME="portfolio-backend"
-JAR_FILE="target/portfolio-backend-0.0.1-SNAPSHOT.jar"
+JAR_FILE="target/website-backend.jar"
 PID_FILE="portfolio-backend.pid"
 LOG_FILE="portfolio-backend.log"
 PORT=8080

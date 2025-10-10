@@ -66,7 +66,7 @@ cd backend
 ## ⚙️ Configuration
 
 ### Default Settings
-- **JAR File**: `target/portfolio-backend-0.0.1-SNAPSHOT.jar`
+- **JAR File**: `target/website-backend.jar`
 - **Port**: `8080`
 - **PID File**: `portfolio-backend.pid`
 - **Log File**: `portfolio-backend.log`
@@ -78,7 +78,7 @@ You can modify the configuration variables at the top of each script:
 ```bash
 # In manage-app.sh or advanced-manage.sh
 APP_NAME="portfolio-backend"
-JAR_FILE="target/portfolio-backend-0.0.1-SNAPSHOT.jar"
+JAR_FILE="target/website-backend.jar"
 PORT=8080
 HEALTH_URL="http://localhost:8080/api/actuator/health"
 ```
