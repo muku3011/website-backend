@@ -1,0 +1,100 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/libraries
+.idea/**/modules.xml
+.idea/**/compiler.xml
+.idea/**/gradle.xml
+.idea/**/jarRepositories.xml
+.idea/**/vcs.xml
+.idea/**/assetWizardSettings.xml
+.idea/**/uiDesigner.xml
+.idea/**/aws.xml
+.idea/**/sonarlint/
+.idea/**/sonarIssues.xml
+
+# IntelliJ cache directories
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/mongoSettings.xml
+
+# User-specific stuff
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+.mvn/wrapper/maven-wrapper-downloader.jar
+.mvn/wrapper/MavenWrapperDownloader.java
+.mvn/wrapper/*
+.mvn/*
+log/
+logs/
+
+# Gradle (in case present)
+.gradle/
+build/
+**/build/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# Logs
+*.log
+
+# Coverage/Reports
+jacoco.exec
+coverage/
+coverage-report/
+.site/
+.surefire-*
+.failsafe-*
+surefire-reports/
+failsafe-reports/
+
+# OS/Editor
+.vscode/
+.idea_modules/
+*.orig
+
+# Local databases and runtime files
+*.sqlite
+*.db
+*.h2.db
+*.mv.db
+
+# Spring Boot
+.spring-boot-devtools.properties
+.spring/
+BOOT-INF/
+META-INF/
+
+# Docker/Containers
+docker-data/
+*.pid
+
+# Temporary files
+tmp/
+temp/
+.cache/
