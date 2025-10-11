@@ -1,9 +1,9 @@
 spring:
   application:
-    name: portfolio-backend
+    name: website-backend
   
   datasource:
-    url: jdbc:sqlite:blog.sqlite
+    url: jdbc:sqlite:${SQLITE_PATH:blog.db}
     driver-class-name: org.sqlite.JDBC
     username: admin
     password: admin

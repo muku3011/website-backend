@@ -1,4 +1,4 @@
-# Portfolio Backend - Blog Management System
+# Website Backend - Blog Management System
 
 A Spring Boot backend application for managing blog posts with SQLite database integration.
 
@@ -79,7 +79,7 @@ A Spring Boot backend application for managing blog posts with SQLite database i
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd portfolio-backend
+   cd website-backend
    ```
 
 2. **Build the application**
@@ -98,7 +98,7 @@ A Spring Boot backend application for managing blog posts with SQLite database i
 
 ### Database
 
-The application uses SQLite database (`portfolio.db`) which will be created automatically on first run. The database file will be located in the project root directory.
+The application uses SQLite database (`blog.db`) which will be created automatically on first run. The database file will be located in the project root directory.
 
 Sample blog data will be automatically populated on first startup.
 
@@ -116,7 +116,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:sqlite:portfolio.db
+    url: jdbc:sqlite:blog.db
     driver-class-name: org.sqlite.JDBC
   
   jpa:
@@ -141,7 +141,7 @@ The application includes CORS configuration to allow frontend integration:
 src/
 ├── main/
 │   ├── java/
-│   │   └── com/mukeshjoshi/portfolio/
+│   │   └── com/irku/portfolio/
 │   │       ├── PortfolioBackendApplication.java
 │   │       ├── config/
 │   │       │   └── DataInitializer.java
@@ -204,8 +204,8 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 
 Build and run:
 ```bash
-docker build -t portfolio-backend .
-docker run -p 8080:8080 portfolio-backend
+docker build -t website-backend .
+docker run -p 8080:8080 website-backend
 ```
 
 ## API Examples
@@ -267,7 +267,7 @@ Enable debug logging by adding to `application.yml`:
 ```yaml
 logging:
   level:
-    com.mukeshjoshi: DEBUG
+    com.irku: DEBUG
     org.springframework.web: DEBUG
 ```
 
