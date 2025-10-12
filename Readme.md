@@ -4,22 +4,22 @@ A Spring Boot backend application for managing blog posts with SQLite database i
 
 ## Features
 
-- **Blog Management**: CRUD operations for blog posts
-- **SQLite Database**: Lightweight, file-based database
-- **RESTful API**: Clean API endpoints for frontend integration
-- **Search Functionality**: Full-text search across blog content
-- **Pagination**: Efficient data loading with pagination support
-- **Featured Posts**: Support for highlighting important posts
-- **View Tracking**: Track blog post views and popularity
+- Blog Management: CRUD operations for blog posts
+- SQLite Database: Lightweight, file-based database
+- RESTful API: Clean API endpoints for frontend integration
+- Search Functionality: Search across blog content
+- Pagination: Efficient data loading with pagination support
+- Featured Posts: Highlight important posts
+- View Tracking: Track blog post views and popularity
 
 ## Technology Stack
 
-- **Java 17**
-- **Spring Boot 3.2.0**
-- **Spring Data JPA**
-- **SQLite Database**
-- **Hibernate**
-- **Maven**
+- Java 24
+- Spring Boot 3.5.6
+- Spring Data JPA
+- SQLite (via xerial sqlite-jdbc)
+- Hibernate (with community dialects)
+- Maven
 
 ## API Endpoints
 
@@ -71,42 +71,42 @@ A Spring Boot backend application for managing blog posts with SQLite database i
 
 ### Prerequisites
 
-- Java 17 or higher
-- Maven 3.6 or higher
+- Java 24 (JDK 24)
+- Maven 3.9+ (recommended)
 
-### Installation
+## Setup
 
-1. **Clone the repository**
+1. Clone the repository
    ```bash
    git clone <repository-url>
    cd website-backend
    ```
 
-2. **Build the application**
+2. Build
    ```bash
    mvn clean install
    ```
 
-3. **Run the application**
-   ```bash
-   mvn spring-boot:run
-   ```
+3. Run (choose one)
+   - Maven:
+     ```bash
+     mvn spring-boot:run
+     ```
+   - JAR:
+     ```bash
+     mvn clean package
+     java -jar target/website-backend.jar
+     ```
 
-4. **Access the application**
-   - API Base URL: `http://localhost:8080/api`
-   - Health Check: `http://localhost:8080/api/actuator/health`
-
-### Database
-
-The application uses SQLite database (`blog.db`) which will be created automatically on first run. The database file will be located in the project root directory.
-
-Sample blog data will be automatically populated on first startup.
+4. Access
+   - Base URL: http://localhost:8080
+   - API base path (if configured via servlet context): /api
 
 ## Configuration
 
-### Application Properties
+Application uses SQLite database file blog.db in the project root.
 
-Key configuration options in `application.yml`:
+Example application.yml:
 
 ```yaml
 server:
