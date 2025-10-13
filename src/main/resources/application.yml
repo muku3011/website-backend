@@ -1,6 +1,22 @@
+# Email recipient (your inbox)
+contact:
+  to:
+    email: mukesh.bciit@gmail.com
+
 spring:
   application:
     name: website-backend
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: muku3011@gmail.com
+    password: cpxmrmdboagvpfsv"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   
   datasource:
     url: jdbc:sqlite:${SQLITE_PATH:blog.db}
