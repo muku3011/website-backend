@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/blogs")
-@CrossOrigin(origins = "*") // Allow CORS for frontend
+@CrossOrigin(origins = "*") // Allow CORS for the frontend
 public class BlogController {
     
     @Autowired

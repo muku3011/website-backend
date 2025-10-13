@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/contact")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8080", "http://localhost:3000", "http://localhost:5500"}, allowCredentials = "false")
+@CrossOrigin(origins = "*") // Allow CORS for the frontend
 public class ContactController {
 
     private final EmailService emailService;
