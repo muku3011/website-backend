@@ -19,7 +19,7 @@ public class BlogController {
     
     @Autowired
     private BlogService blogService;
-    
+
     // Get all published blogs
     @GetMapping
     public ResponseEntity<List<BlogSummaryDto>> getAllBlogs() {
@@ -43,7 +43,7 @@ public class BlogController {
         return blog.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    
+
     // Get published blog by slug
     @GetMapping("/slug/{slug}")
     public ResponseEntity<BlogDto> getBlogBySlug(@PathVariable String slug) {

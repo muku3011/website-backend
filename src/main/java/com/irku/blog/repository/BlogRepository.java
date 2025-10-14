@@ -5,6 +5,7 @@ import com.irku.blog.entity.BlogStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,10 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
     
     // Find blog by slug (any status)
     Optional<Blog> findBySlug(String slug);
+
+    @Modifying
+    @Query("update Blog b set b.viewCount = coalesce(b.viewCount, 0) + 1 where b.slug = :slug and b.status = com.irku.blog.entity.BlogStatus.PUBLISHED")
+    void incrementViewCountBySlug(@Param("slug") String slug);
     
     // Search blogs by title or content
     @Query("SELECT b FROM Blog b WHERE b.status = :status AND " +
@@ -54,7 +59,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
     // Count blogs by status
     long countByStatus(BlogStatus status);
     
-    // Find blogs with view count above threshold
+    // Find blogs with view count above a threshold
     @Query("SELECT b FROM Blog b WHERE b.status = :status AND b.viewCount >= :minViews " +
            "ORDER BY b.viewCount DESC")
     List<Blog> findPopularBlogs(@Param("status") BlogStatus status, 

@@ -9,8 +9,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: muku3011@gmail.com
-    password: cpxmrmdboagvpfsv"
+    username: ${EMAIL_ID:muku3011@gmail.com}
+    password: ${EMAIL_PASSWORD:changeit}
     properties:
       mail:
         smtp:
@@ -52,9 +52,9 @@ server:
 logging:
   level:
     com.irku: INFO
-    org.springframework.web: INFO
-    org.hibernate.SQL: INFO
-    org.hibernate.type.descriptor.sql.BasicBinder: INFO
+#    org.springframework.web: INFO
+#    org.hibernate.SQL: INFO
+#    org.hibernate.type.descriptor.sql.BasicBinder: INFO
 
 management:
   endpoints:

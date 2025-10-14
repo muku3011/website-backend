@@ -169,7 +169,8 @@ public class BlogService {
         blogRepository.findBySlugAndStatus(slug, BlogStatus.PUBLISHED)
                 .ifPresent(Blog::incrementViewCount);
     }
-    
+
+
     // Get blog statistics
     @Transactional(readOnly = true)
     public BlogStats getBlogStats() {
