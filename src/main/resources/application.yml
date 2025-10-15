@@ -27,7 +27,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.community.dialect.SQLiteDialect
@@ -52,9 +52,9 @@ server:
 logging:
   level:
     com.irku: INFO
-#    org.springframework.web: INFO
-#    org.hibernate.SQL: INFO
-#    org.hibernate.type.descriptor.sql.BasicBinder: INFO
+    org.springframework.web: INFO
+    org.hibernate.SQL: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO
 
 management:
   endpoints:
