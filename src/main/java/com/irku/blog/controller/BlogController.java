@@ -29,7 +29,14 @@ public class BlogController {
         List<BlogSummaryDto> blogs = blogService.getAllPublishedBlogs();
         return ResponseEntity.ok(blogs);
     }
-    
+
+    @Operation(summary = "Get blog statistics (total published blogs and total views)")
+    @GetMapping("/stats")
+    public ResponseEntity<BlogService.BlogStats> getBlogStats() {
+        BlogService.BlogStats stats = blogService.getBlogStats();
+        return ResponseEntity.ok(stats);
+    }
+
     @Operation(summary = "Get published blogs (paginated)")
     @GetMapping("/page")
     public ResponseEntity<Page<BlogSummaryDto>> getBlogsWithPagination(
