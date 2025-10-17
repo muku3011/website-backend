@@ -18,9 +18,9 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Only initialize if no blogs exist
-        if (blogRepository.count() == 0) {
+/*        if (blogRepository.count() == 0) {
             initializeSampleBlogs();
-        }
+        }*/
     }
     
     private void initializeSampleBlogs() {
