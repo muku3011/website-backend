@@ -111,7 +111,10 @@ public class BlogService {
         blog.setFeaturedImageUrl(blogDto.getFeaturedImageUrl());
         blog.setStatus(blogDto.getStatus() != null ? blogDto.getStatus() : BlogStatus.DRAFT);
         blog.setIsFeatured(blogDto.getIsFeatured() != null ? blogDto.getIsFeatured() : false);
-        
+        blog.setCreatedAt(LocalDateTime.now());
+        //blog.setUpdatedAt(LocalDateTime.now());
+        //blog.setPublishedAt(blog.getCreatedAt());
+
         // Ensure unique slug
         String baseSlug = blog.getSlug();
         String slug = baseSlug;
@@ -137,7 +140,8 @@ public class BlogService {
                     blog.setFeaturedImageUrl(blogDto.getFeaturedImageUrl());
                     blog.setStatus(blogDto.getStatus());
                     blog.setIsFeatured(blogDto.getIsFeatured());
-                    
+                    blog.setUpdatedAt(LocalDateTime.now());
+
                     // Update slug if title changed
                     String newSlug = blog.generateSlug(blogDto.getTitle());
                     if (!newSlug.equals(blog.getSlug())) {

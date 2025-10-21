@@ -15,11 +15,12 @@ public class Blog {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true)
     private Long id;
     
     @NotBlank(message = "Title is required")
     @Size(max = 200, message = "Title must not exceed 200 characters")
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, length = 200, unique = true)
     private String title;
     
     @NotBlank(message = "Content is required")
@@ -27,7 +28,7 @@ public class Blog {
     private String content;
     
     @Size(max = 500, message = "Excerpt must not exceed 500 characters")
-    @Column(length = 500)
+    @Column(length = 500, unique = true)
     private String excerpt;
     
     @Size(max = 100, message = "Author must not exceed 100 characters")
