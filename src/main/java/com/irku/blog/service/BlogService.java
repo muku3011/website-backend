@@ -21,10 +21,19 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class BlogService {
-    
+
     @Autowired
     private BlogRepository blogRepository;
-    
+
+    // Get all published blogs
+    @Transactional(readOnly = true)
+    public List<BlogSummaryDto> getAllBlogs() {
+        return blogRepository.findAll()
+                .stream()
+                .map(BlogSummaryDto::new)
+                .collect(Collectors.toList());
+    }
+
     // Get all published blogs
     @Transactional(readOnly = true)
     public List<BlogSummaryDto> getAllPublishedBlogs() {
@@ -33,7 +42,7 @@ public class BlogService {
                 .map(BlogSummaryDto::new)
                 .collect(Collectors.toList());
     }
-    
+
     // Get published blogs with pagination
     @Transactional(readOnly = true)
     public Page<BlogSummaryDto> getPublishedBlogs(int page, int size) {
@@ -41,28 +50,28 @@ public class BlogService {
         return blogRepository.findByStatusOrderByPublishedAtDesc(BlogStatus.PUBLISHED, pageable)
                 .map(BlogSummaryDto::new);
     }
-    
+
     // Get blog by ID
     @Transactional(readOnly = true)
     public Optional<BlogDto> getBlogById(Long id) {
         return blogRepository.findById(id)
                 .map(BlogDto::new);
     }
-    
+
     // Get published blog by slug
     @Transactional(readOnly = true)
     public Optional<BlogDto> getPublishedBlogBySlug(String slug) {
         return blogRepository.findBySlugAndStatus(slug, BlogStatus.PUBLISHED)
                 .map(BlogDto::new);
     }
-    
+
     // Get blog by slug (any status)
     @Transactional(readOnly = true)
     public Optional<BlogDto> getBlogBySlug(String slug) {
         return blogRepository.findBySlug(slug)
                 .map(BlogDto::new);
     }
-    
+
     // Get featured blogs
     @Transactional(readOnly = true)
     public List<BlogSummaryDto> getFeaturedBlogs() {
@@ -71,7 +80,7 @@ public class BlogService {
                 .map(BlogSummaryDto::new)
                 .collect(Collectors.toList());
     }
-    
+
     // Search blogs
     @Transactional(readOnly = true)
     public Page<BlogSummaryDto> searchBlogs(String searchTerm, int page, int size) {
@@ -79,7 +88,7 @@ public class BlogService {
         return blogRepository.searchPublishedBlogs(searchTerm, BlogStatus.PUBLISHED, pageable)
                 .map(BlogSummaryDto::new);
     }
-    
+
     // Get recent blogs
     @Transactional(readOnly = true)
     public List<BlogSummaryDto> getRecentBlogs(int limit) {
@@ -90,7 +99,7 @@ public class BlogService {
                 .map(BlogSummaryDto::new)
                 .collect(Collectors.toList());
     }
-    
+
     // Get popular blogs
     @Transactional(readOnly = true)
     public List<BlogSummaryDto> getPopularBlogs(int limit) {
@@ -100,7 +109,7 @@ public class BlogService {
                 .map(BlogSummaryDto::new)
                 .collect(Collectors.toList());
     }
-    
+
     // Create new blog
     public BlogDto createBlog(BlogDto blogDto) {
         Blog blog = new Blog();
@@ -112,8 +121,9 @@ public class BlogService {
         blog.setStatus(blogDto.getStatus() != null ? blogDto.getStatus() : BlogStatus.DRAFT);
         blog.setIsFeatured(blogDto.getIsFeatured() != null ? blogDto.getIsFeatured() : false);
         blog.setCreatedAt(LocalDateTime.now());
-        //blog.setUpdatedAt(LocalDateTime.now());
-        //blog.setPublishedAt(blog.getCreatedAt());
+        if (blogDto.getStatus().equals(BlogStatus.PUBLISHED)) {
+            blog.setPublishedAt(LocalDateTime.now());
+        }
 
         // Ensure unique slug
         String baseSlug = blog.getSlug();
@@ -124,11 +134,11 @@ public class BlogService {
             counter++;
         }
         blog.setSlug(slug);
-        
+
         Blog savedBlog = blogRepository.save(blog);
         return new BlogDto(savedBlog);
     }
-    
+
     // Update blog
     public Optional<BlogDto> updateBlog(Long id, BlogDto blogDto) {
         return blogRepository.findById(id)
@@ -141,6 +151,9 @@ public class BlogService {
                     blog.setStatus(blogDto.getStatus());
                     blog.setIsFeatured(blogDto.getIsFeatured());
                     blog.setUpdatedAt(LocalDateTime.now());
+                    if (blogDto.getStatus().equals(BlogStatus.PUBLISHED)) {
+                        blog.setPublishedAt(LocalDateTime.now());
+                    }
 
                     // Update slug if title changed
                     String newSlug = blog.generateSlug(blogDto.getTitle());
@@ -153,12 +166,12 @@ public class BlogService {
                         }
                         blog.setSlug(slug);
                     }
-                    
+
                     Blog savedBlog = blogRepository.save(blog);
                     return new BlogDto(savedBlog);
                 });
     }
-    
+
     // Delete blog
     public boolean deleteBlog(Long id) {
         if (blogRepository.existsById(id)) {
@@ -167,7 +180,7 @@ public class BlogService {
         }
         return false;
     }
-    
+
     // Increment view count
     public void incrementViewCount(String slug) {
         blogRepository.findBySlugAndStatus(slug, BlogStatus.PUBLISHED)
@@ -183,24 +196,24 @@ public class BlogService {
                 .stream()
                 .mapToLong(blog -> blog.getViewCount() != null ? blog.getViewCount() : 0L)
                 .sum();
-        
+
         return new BlogStats(totalBlogs, totalViews);
     }
-    
+
     // Inner class for blog statistics
     public static class BlogStats {
         private final long totalBlogs;
         private final long totalViews;
-        
+
         public BlogStats(long totalBlogs, long totalViews) {
             this.totalBlogs = totalBlogs;
             this.totalViews = totalViews;
         }
-        
+
         public long getTotalBlogs() {
             return totalBlogs;
         }
-        
+
         public long getTotalViews() {
             return totalViews;
         }

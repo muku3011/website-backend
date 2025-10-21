@@ -23,9 +23,16 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
+    @Operation(summary = "Get all blogs")
+    @GetMapping("/all")
+    public ResponseEntity<List<BlogSummaryDto>> getAllBlogs() {
+        List<BlogSummaryDto> blogs = blogService.getAllBlogs();
+        return ResponseEntity.ok(blogs);
+    }
+
     @Operation(summary = "Get all published blogs")
     @GetMapping
-    public ResponseEntity<List<BlogSummaryDto>> getAllBlogs() {
+    public ResponseEntity<List<BlogSummaryDto>> getAllPublishedBlogs() {
         List<BlogSummaryDto> blogs = blogService.getAllPublishedBlogs();
         return ResponseEntity.ok(blogs);
     }
