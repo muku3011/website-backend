@@ -16,6 +16,7 @@ public class BlogSummaryDto {
     private Long viewCount;
     private Boolean isFeatured;
     private LocalDateTime publishedAt;
+    private LocalDateTime updatedAt;
     
     // Constructors
     public BlogSummaryDto() {}
@@ -31,8 +32,9 @@ public class BlogSummaryDto {
         this.viewCount = blog.getViewCount();
         this.isFeatured = blog.getIsFeatured();
         this.publishedAt = blog.getPublishedAt();
+        this.updatedAt = blog.getUpdatedAt();
     }
-    
+
     // Getters and Setters
     public Long getId() {
         return id;
@@ -112,5 +114,13 @@ public class BlogSummaryDto {
     
     public void setPublishedAt(LocalDateTime publishedAt) {
         this.publishedAt = publishedAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
