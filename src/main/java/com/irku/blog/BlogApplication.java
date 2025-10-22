@@ -8,6 +8,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class BlogApplication {
         SpringApplication.run(BlogApplication.class, args);
     }
 
-    @Bean
+/*    @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration cfg = new CorsConfiguration();
         cfg.setAllowedOrigins(List.of("https://irku.se", "https://www.irku.se", "https://irku.se:8700"));
@@ -41,6 +43,16 @@ public class BlogApplication {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", cfg);
         return new CorsFilter(source);
+    }*/
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/contact").allowedOrigins("http://localhost:8700", "https://irku.se", "https://www.irku.se");
+            }
+        };
     }
 
 }
