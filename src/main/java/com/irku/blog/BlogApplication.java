@@ -50,8 +50,8 @@ public class BlogApplication {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/contact").allowedMethods(HttpMethod.OPTIONS.name(), HttpMethod.POST.name()).allowedOrigins("http://localhost:8700", "https://irku.se", "https://www.irku.se");
-                registry.addMapping("/blogs").allowedOrigins("http://localhost:8700", "https://irku.se", "https://www.irku.se");
+                registry.addMapping("/api/contact").allowedMethods(HttpMethod.OPTIONS.name(), HttpMethod.POST.name()).allowedOrigins("http://localhost:8700", "https://irku.se", "https://www.irku.se");
+                registry.addMapping("/api/blogs").allowedOrigins("http://localhost:8700", "https://irku.se", "https://www.irku.se");
             }
         };
     }
