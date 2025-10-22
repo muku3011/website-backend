@@ -16,7 +16,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/blogs")
-@CrossOrigin(origins = "*") // Allow CORS for the frontend
 @Tag(name = "Blogs", description = "Operations for browsing and managing blogs")
 public class BlogController {
     

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/contact")
-@CrossOrigin(origins = "*") // Allow CORS for the frontend
 @Tag(name = "Contact", description = "Send contact requests")
 public class ContactController {
 
