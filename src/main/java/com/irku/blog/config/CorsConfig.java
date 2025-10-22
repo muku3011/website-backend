@@ -15,7 +15,7 @@ public class CorsConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(List.of("https://irku.se"));
+        cfg.setAllowedOrigins(List.of("https://irku.se", "https://www.irku.se"));
         cfg.setAllowedMethods(List.of(
                 HttpMethod.GET.name(),
                 HttpMethod.POST.name(),
@@ -26,7 +26,7 @@ public class CorsConfig {
         ));
         cfg.setAllowedHeaders(List.of("*"));
         cfg.setExposedHeaders(List.of("Location"));
-        cfg.setAllowCredentials(Boolean.TRUE); // must be false when the origin is "*"
+        cfg.setAllowCredentials(Boolean.FALSE); // must be false when the origin is "*"
         cfg.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
