@@ -24,7 +24,7 @@ public class BlogApplication {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true); // If you need to send cookies or other credentials
         config.addAllowedOrigin("https://irku.se"); // The origin that is making the request
-        config.addAllowedOrigin("http://localhost:63342");
+        config.addAllowedOrigin("http://localhost:63342"); //Allow origin for local development
         config.addAllowedHeader("*");
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("HEAD");
