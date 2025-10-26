@@ -1,63 +1,63 @@
-# Email recipient (your inbox)
+# Server configuration
+server:
+  port: 8700 # HTTP(S) server port
+  servlet:
+    context-path: /api # Base context path for all endpoints
+  ssl:
+    enabled: true # Enable TLS for secure transport
+    # Keystore can be overridden via environment variables; defaults are safe for local dev only
+    key-store: ${SSL_KEY_STORE:classpath:keystore.p12} # Path or classpath location to keystore
+    key-store-type: ${SSL_KEY_STORE_TYPE:PKCS12} # Keystore type (PKCS12 recommended)
+    key-store-password: ${SSL_KEY_STORE_PASSWORD:changeit} # DO NOT use 'changeit' in production
+    key-alias: ${SSL_KEY_ALIAS:tomcat} # Alias of the certificate within the keystore
+
+# Logging levels per package for observability and debugging
+logging:
+  level:
+    com.irku: INFO # App-specific logs
+    org.springframework.web: DEBUG # Web layer request/response details
+    org.hibernate.SQL: INFO # Show executed SQL
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO # Show SQL parameter bindings
+
+# Contact configuration (email recipient)
 contact:
   to:
-    email: mukesh.bciit@gmail.com
+    email: mukesh.bciit@gmail.com # Destination inbox for contact messages
 
 spring:
   application:
-    name: website-backend
+    name: website-backend # Application name for logging/actuator
   mail:
+    # SMTP configuration; supply real credentials via environment variables
     host: smtp.gmail.com
     port: 587
-    username: ${EMAIL_ID:muku3011@gmail.com}
-    password: ${EMAIL_PASSWORD:changeit}
+    username: ${EMAIL_ID:muku3011@gmail.com} # Override in env for deployments
+    password: ${EMAIL_PASSWORD:changeit} # NEVER commit real secrets
     properties:
       mail:
         smtp:
           auth: true
           starttls:
-            enable: true
-  
+            enable: true # Use STARTTLS for secure SMTP
   datasource:
+    # SQLite datasource; file path can be overridden by SQLITE_PATH env var
     url: jdbc:sqlite:${SQLITE_PATH:blog.db}
     driver-class-name: org.sqlite.JDBC
-    username: admin
-    password: admin
-  
+    username: admin # Not used by SQLite but kept for compatibility
+    password: admin # Not used by SQLite but kept for compatibility
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: false
+      ddl-auto: update # Auto-migrate schema; prefer validated migrations in prod
+    show-sql: false # Avoid noisy logs in production
     properties:
       hibernate:
         dialect: org.hibernate.community.dialect.SQLiteDialect
-        format_sql: true
+        format_sql: true # Pretty-print SQL in logs
     database-platform: org.hibernate.community.dialect.SQLiteDialect
-  
-  devtools:
-    restart:
-      enabled: true
 
-server:
-  port: 8700
-  servlet:
-    context-path: /api
-  ssl:
-    enabled: true
-    key-store: ${SSL_KEY_STORE:classpath:keystore.p12}
-    key-store-type: ${SSL_KEY_STORE_TYPE:PKCS12}
-    key-store-password: ${SSL_KEY_STORE_PASSWORD:changeit}
-    key-alias: ${SSL_KEY_ALIAS:tomcat}
-
-logging:
-  level:
-    com.irku: INFO
-    org.springframework.web: DEBUG
-    org.hibernate.SQL: INFO
-    org.hibernate.type.descriptor.sql.BasicBinder: INFO
-
+# Spring Boot Actuator exposure over HTTP
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info # Limit exposed endpoints for safety

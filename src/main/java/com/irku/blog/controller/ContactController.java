@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Contact", description = "Send contact requests")
 public class ContactController {
 
-    @Autowired
-    private EmailService emailService;
+    private final EmailService emailService;
+
+    public ContactController(EmailService emailService) {
+        this.emailService = emailService;
+    }
 
     @Operation(summary = "Submit a contact request")
     @PostMapping

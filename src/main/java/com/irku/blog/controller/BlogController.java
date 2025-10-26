@@ -3,9 +3,9 @@ package com.irku.blog.controller;
 import com.irku.blog.dto.BlogDto;
 import com.irku.blog.dto.BlogSummaryDto;
 import com.irku.blog.service.BlogService;
+import com.irku.blog.service.BlogServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,11 @@ import java.util.Optional;
 @Tag(name = "Blogs", description = "Operations for browsing and managing blogs")
 public class BlogController {
     
-    @Autowired
-    private BlogService blogService;
+    private final BlogService blogService;
+
+    public BlogController(BlogService blogService) {
+        this.blogService = blogService;
+    }
 
     @Operation(summary = "Get all blogs")
     @GetMapping("/all")
@@ -37,8 +40,8 @@ public class BlogController {
 
     @Operation(summary = "Get blog statistics (total published blogs and total views)")
     @GetMapping("/stats")
-    public ResponseEntity<BlogService.BlogStats> getBlogStats() {
-        BlogService.BlogStats stats = blogService.getBlogStats();
+    public ResponseEntity<BlogServiceImpl.BlogStats> getBlogStats() {
+        BlogServiceImpl.BlogStats stats = blogService.getBlogStats();
         return ResponseEntity.ok(stats);
     }
 
